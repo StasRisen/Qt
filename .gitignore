@@ -1,1 +1,3 @@
-App.pro*
+*.user*
+*.pro.user 
+*.bak
