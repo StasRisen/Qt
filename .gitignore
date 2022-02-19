@@ -1,3 +1,7 @@
 *.user*
 *.pro.user 
 *.bak
+.qmake*
+Makefil*
+release/
+debug/
