@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    qsrand(QDateTime::currentMSecsSinceEpoch());//случайные числа
+    srand(QDateTime::currentMSecsSinceEpoch());//случайные числа
 
     scene = new QGraphicsScene(this);//создаем сцену
     ui->graphicsView->setScene(scene);//задаем сцену для GraphicsView
@@ -34,7 +34,7 @@ void MainWindow::load()//загрузка из XML
         xmlReader.setDevice(&file);//привязываем файл к потоку
         while (!xmlReader.atEnd() && !xmlReader.hasError()){//пока есть поля, читаем
             QXmlStreamReader::TokenType token = xmlReader.readNext();//поле
-            if(token == QXmlStreamReader::StartElement && xmlReader.name() == "point"){ //если это начало элемента и одновременно  имя равно point (исходя из структуры xml , чтобы он поле data не проверял, там все равно нет еще значений.)
+            if(token == QXmlStreamReader::StartElement && xmlReader.name().toString() == "point"){ //если это начало элемента и одновременно  имя равно point (исходя из структуры xml , чтобы он поле data не проверял, там все равно нет еще значений.)
                 int x = xmlReader.attributes().value("x").toInt();//читаем аттрибуты
                 int y = xmlReader.attributes().value("y").toInt();
                 QPointF p(x,y);//создаем точку
@@ -149,8 +149,8 @@ void MainWindow::generate()
     int maxX = this->ui->graphicsView->width() - 20;
     int x,y;
     while(n > 0){//пока не пройдем все точки
-        x=  qrand()%maxX + 10;//генерируем
-        y = qrand()%maxY + 10;
+        x=  rand()%maxX + 10;//генерируем
+        y = rand()%maxY + 10;
         QPointF p(x,y);
         if(!points.contains(p)){//если такой точки нет то
             points.append(p);//добавим ее
